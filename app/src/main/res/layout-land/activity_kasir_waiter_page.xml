@@ -91,7 +91,7 @@
             android:text="tambah pesanan" />
 
         <Button
-            android:id="@+id/button5"
+            android:id="@+id/btn-transaction"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginHorizontal="20dp"
