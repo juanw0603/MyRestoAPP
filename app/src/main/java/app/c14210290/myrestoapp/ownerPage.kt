@@ -1,6 +1,7 @@
 package app.c14210290.myrestoapp
 
 import android.os.Bundle
+import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -16,5 +17,17 @@ class ownerPage : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        val mFragmentManager = supportFragmentManager
+
+        val fOwner_DataMenu = Owner_DataMenu()
+        val fOwner_LaporanPenjualan = Owner_LaporanPenjualan()
+        val fOwner_DaftarWaiterOrCashier = Owner_DaftarWaiterOrCashier()
+
+        val navToDataMenu = findViewById<Button>(R.id.btn_ToDataMenu)
+        val navToLaporanPenjualan = findViewById<Button>(R.id.btn_ToLaporanPenjualan)
+        val navToDaftarWaiterOrCashier = findViewById<Button>(R.id.btn_ToDaftarWaiterOrCashier)
+
+        val logout = findViewById<Button>(R.id.btn_Logout)
     }
 }

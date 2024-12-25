@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         val radio_owner = findViewById<RadioButton>(R.id.rb_owner)
         val radio_kasirAtauWaiter = findViewById<RadioButton>(R.id.rb_kasirAtauWaiter)
 
-        val btnLogin = findViewById<Button>(R.id.btnLogin)
+        val btnLogin = findViewById<Button>(R.id.btn_Login)
 
         btnLogin.setOnClickListener{
 
