@@ -29,5 +29,31 @@ class ownerPage : AppCompatActivity() {
         val navToDaftarWaiterOrCashier = findViewById<Button>(R.id.btn_ToDaftarWaiterOrCashier)
 
         val logout = findViewById<Button>(R.id.btn_Logout)
+
+
+        navToDataMenu.setOnClickListener{
+            mFragmentManager.findFragmentByTag(Owner_DataMenu::class.java.simpleName)
+            mFragmentManager
+                .beginTransaction()
+                .replace(R.id.layoutFragment,fOwner_DataMenu, Owner_DataMenu::class.java.simpleName)
+                .commit()
+        }
+
+        navToLaporanPenjualan.setOnClickListener {
+            mFragmentManager.findFragmentByTag(Owner_LaporanPenjualan::class.java.simpleName)
+            mFragmentManager
+                .beginTransaction()
+                .replace(R.id.layoutFragment,fOwner_LaporanPenjualan, Owner_LaporanPenjualan::class.java.simpleName)
+                .commit()
+        }
+
+        navToDaftarWaiterOrCashier.setOnClickListener{
+            mFragmentManager.findFragmentByTag(Owner_DaftarWaiterOrCashier::class.java.simpleName)
+            mFragmentManager
+                .beginTransaction()
+                .replace(R.id.layoutFragment,fOwner_DaftarWaiterOrCashier, Owner_DaftarWaiterOrCashier::class.java.simpleName)
+                .commit()
+        }
+
     }
 }
