@@ -1,6 +1,7 @@
 package app.c14210290.myrestoapp.database
 
 import androidx.room.Entity
+import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "tables")
@@ -11,7 +12,17 @@ data class TableEntity(
     val currentOrder: Int? = null // ID pesanan saat ini (nullable)
 )
 
-@Entity(tableName = "orders")
+@Entity(
+    tableName = "orders",
+    foreignKeys = [
+        ForeignKey(
+            entity = TableEntity::class,
+            parentColumns = ["tableId"],
+            childColumns = ["tableId"],
+            onDelete = ForeignKey.CASCADE
+        )
+    ]
+)
 data class OrderEntity(
     @PrimaryKey(autoGenerate = true) val orderId: Int = 0,
     val tableId: Int, // Relasi ke tabel `tables`
@@ -21,7 +32,23 @@ data class OrderEntity(
     val updatedAt: String // Waktu diperbarui
 )
 
-@Entity(tableName = "order_details")
+@Entity(
+    tableName = "order_details",
+    foreignKeys = [
+        ForeignKey(
+            entity = OrderEntity::class,
+            parentColumns = ["orderId"],
+            childColumns = ["orderId"],
+            onDelete = ForeignKey.CASCADE
+        ),
+        ForeignKey(
+            entity = MenuItemEntity::class,
+            parentColumns = ["menuItemsId"],
+            childColumns = ["menuItemId"],
+            onDelete = ForeignKey.CASCADE
+        )
+    ]
+)
 data class OrderDetailEntity(
     @PrimaryKey(autoGenerate = true) val orderDetailsId: Int = 0,
     val orderId: Int, // Relasi ke tabel `orders`

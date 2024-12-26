@@ -1,5 +1,6 @@
 package app.c14210290.myrestoapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.activity.enableEdgeToEdge
@@ -53,6 +54,10 @@ class ownerPage : AppCompatActivity() {
                 .beginTransaction()
                 .replace(R.id.layoutFragment,fOwner_DaftarWaiterOrCashier, Owner_DaftarWaiterOrCashier::class.java.simpleName)
                 .commit()
+        }
+
+        logout.setOnClickListener{
+            startActivity(Intent(this@ownerPage,MainActivity::class.java))
         }
 
     }
