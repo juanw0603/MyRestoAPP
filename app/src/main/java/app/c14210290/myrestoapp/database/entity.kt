@@ -23,7 +23,7 @@ data class OrderEntity(
 
 @Entity(tableName = "order_details")
 data class OrderDetailEntity(
-    @PrimaryKey(autoGenerate = true) val order_detailsId: Int = 0,
+    @PrimaryKey(autoGenerate = true) val orderDetailsId: Int = 0,
     val orderId: Int, // Relasi ke tabel `orders`
     val menuItemId: Int, // Relasi ke tabel `menu_items`
     val quantity: Int, // Jumlah item
@@ -33,7 +33,7 @@ data class OrderDetailEntity(
 
 @Entity(tableName = "menu_items")
 data class MenuItemEntity(
-    @PrimaryKey(autoGenerate = true) val menu_itemsId: Int = 0,
+    @PrimaryKey(autoGenerate = true) val menuItemsId: Int = 0,
     val name: String, // Nama menu
     val price: Double // Harga menu
 )
