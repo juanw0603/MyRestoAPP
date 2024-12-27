@@ -10,10 +10,42 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import app.c14210290.myrestoapp.database.RestoDB
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var DB:RestoDB
+
+//    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
+//        DB = RestoDB.getdatabase(this)
+//        super.onCreate(savedInstanceState, persistentState)
+//        val db = Firebase.firestore
+//        db.collection("owner").get()
+//            .addOnSuccessListener {
+//                    result ->
+//                CoroutineScope(Dispatchers.IO).async {
+//                    for (document in result){
+//
+//                        DB.funownerDao().insertOwner(OwnerEntity(
+//                            name = document.data.get("name").toString(),
+//                            username = document.data.get("username").toString(),
+//                            email = document.data.get("email").toString(),
+//                            password = document.data.get("password").toString()
+//                        )
+//                        )
+//                    }
+//                }
+//
+//                Log.d("FirebaseDebug", "Data fetched successfully")
+//            }.addOnFailureListener { e ->
+//                Log.e("FirebaseError", "Error fetching data", e)
+//            }
+//    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        DB = RestoDB.getdatabase(this)
+
+
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
@@ -23,13 +55,16 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        val etUsername = findViewById<EditText>(R.id.etUsername)
+        val etUsername = findViewById<EditText>(R.id.et_nameProfile)
         val etPassword = findViewById<EditText>(R.id.etPassword)
 
         val radio_owner = findViewById<RadioButton>(R.id.rb_owner)
         val radio_kasirAtauWaiter = findViewById<RadioButton>(R.id.rb_kasirAtauWaiter)
 
         val btnLogin = findViewById<Button>(R.id.btn_Login)
+        val btnRegister = findViewById<Button>(R.id.btn_register)
+
+
 
         btnLogin.setOnClickListener{
 
@@ -39,15 +74,31 @@ class MainActivity : AppCompatActivity() {
             }
 
             if (radio_owner.isChecked){
+                val username = etUsername.text.toString()
+                val password = etPassword.text.toString()
+                if (DB.funownerDao().getOwnerByEmailAndPassword(username,password) == null){
+                    Toast.makeText(this, "username atau passoword salah!!!!",Toast.LENGTH_LONG).show()
+                    return@setOnClickListener
+                }
+
                 startActivity(Intent(this@MainActivity,ownerPage::class.java))
             }
 
             if (radio_kasirAtauWaiter.isChecked){
+                val username = etUsername.text.toString()
+                val password = etPassword.text.toString()
+                if (DB.funCashierOrWaiterDao().getCashierOrWaiterByUserAndPassword(username,password) == null){
+                    Toast.makeText(this, "username atau passoword salah!!!!",Toast.LENGTH_LONG).show()
+                    return@setOnClickListener
+                }
+
                 startActivity(Intent(this@MainActivity,kasirWaiter_page::class.java))
             }
 
         }
 
-
+        btnRegister.setOnClickListener {
+            startActivity(Intent(this@MainActivity,register::class.java))
+        }
     }
 }

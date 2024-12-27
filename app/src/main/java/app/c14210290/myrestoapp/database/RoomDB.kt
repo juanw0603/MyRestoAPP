@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.sqlite.db.SupportSQLiteDatabase
+import java.util.concurrent.Executors
 
 
 @Database(entities = [TableEntity::class, OrderEntity::class, OrderDetailEntity::class, MenuItemEntity::class, OwnerEntity::class, CashierOrWaiterEntity::class], version = 1)
@@ -14,6 +16,7 @@ abstract class RestoDB : RoomDatabase() {
     abstract fun funorderDetailDao(): OrderDetailDao
     abstract fun funmenuItemDao(): MenuItemDao
     abstract fun funownerDao(): OwnerDao
+    abstract fun funCashierOrWaiterDao(): CashierOrWaiterDao
 
     companion object {
         @Volatile

@@ -7,96 +7,96 @@ import androidx.room.*
 @Dao
 interface TableDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertTable(table: TableEntity): Long
+     fun insertTable(table: TableEntity)
 
     @Update
-    suspend fun updateTable(table: TableEntity)
+     fun updateTable(table: TableEntity)
 
     @Delete
-    suspend fun deleteTable(table: TableEntity)
+     fun deleteTable(table: TableEntity)
 
     @Query("SELECT * FROM tables WHERE tableId = :tableId")
-    suspend fun getTableById(tableId: Int): TableEntity?
+     fun getTableById(tableId: Int): TableEntity?
 
     @Query("SELECT * FROM tables")
-    suspend fun getAllTables(): List<TableEntity>
+     fun getAllTables(): MutableList<TableEntity>
 }
 
 @Dao
 interface OrderDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertOrder(order: OrderEntity): Long
+     fun insertOrder(order: OrderEntity): Long
 
     @Update
-    suspend fun updateOrder(order: OrderEntity)
+     fun updateOrder(order: OrderEntity)
 
     @Delete
-    suspend fun deleteOrder(order: OrderEntity)
+     fun deleteOrder(order: OrderEntity)
 
     @Query("SELECT * FROM orders WHERE orderId = :orderId")
-    suspend fun getOrderById(orderId: Int): OrderEntity?
+     fun getOrderById(orderId: Int): OrderEntity?
 
     @Query("SELECT * FROM orders WHERE tableId = :tableId")
-    suspend fun getOrdersByTableId(tableId: Int): List<OrderEntity>
+     fun getOrdersByTableId(tableId: Int): MutableList<OrderEntity>
 
     @Query("SELECT * FROM orders")
-    suspend fun getAllOrders(): List<OrderEntity>
+     fun getAllOrders(): MutableList<OrderEntity>
 }
 
 
 @Dao
 interface OrderDetailDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertOrderDetail(orderDetail: OrderDetailEntity): Long
+     fun insertOrderDetail(orderDetail: OrderDetailEntity): Long
 
     @Update
-    suspend fun updateOrderDetail(orderDetail: OrderDetailEntity)
+     fun updateOrderDetail(orderDetail: OrderDetailEntity)
 
     @Delete
-    suspend fun deleteOrderDetail(orderDetail: OrderDetailEntity)
+     fun deleteOrderDetail(orderDetail: OrderDetailEntity)
 
     @Query("SELECT * FROM order_details WHERE orderId = :orderId")
-    suspend fun getOrderDetailsByOrderId(orderId: Int): List<OrderDetailEntity>
+     fun getOrderDetailsByOrderId(orderId: Int): MutableList<OrderDetailEntity>
 
     @Query("SELECT * FROM order_details")
-    suspend fun getAllOrderDetails(): List<OrderDetailEntity>
+     fun getAllOrderDetails(): MutableList<OrderDetailEntity>
 }
 
 @Dao
 interface MenuItemDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertMenuItem(menuItem: MenuItemEntity): Long
+     fun insertMenuItem(menuItem: MenuItemEntity): Long
 
     @Update
-    suspend fun updateMenuItem(menuItem: MenuItemEntity)
+     fun updateMenuItem(menuItem: MenuItemEntity)
 
     @Delete
-    suspend fun deleteMenuItem(menuItem: MenuItemEntity)
+     fun deleteMenuItem(menuItem: MenuItemEntity)
 
     @Query("SELECT * FROM menu_items WHERE menuItemsId = :menuItemId")
-    suspend fun getMenuItemById(menuItemId: Int): MenuItemEntity?
+     fun getMenuItemById(menuItemId: Int): MenuItemEntity?
 
     @Query("SELECT * FROM menu_items")
-    suspend fun getAllMenuItems(): List<MenuItemEntity>
+     fun getAllMenuItems(): MutableList<MenuItemEntity>
 }
 
 
 @Dao
 interface OwnerDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertOwner(owner: OwnerEntity): Long
+     fun insertOwner(owner: OwnerEntity): Long
 
     @Update
-    suspend fun updateOwner(owner: OwnerEntity)
+     fun updateOwner(owner: OwnerEntity)
 
     @Delete
-    suspend fun deleteOwner(owner: OwnerEntity)
+     fun deleteOwner(owner: OwnerEntity)
 
-    @Query("SELECT * FROM owners WHERE email = :email AND password = :password")
-    suspend fun getOwnerByEmailAndPassword(email: String, password: String): OwnerEntity?
+    @Query("SELECT * FROM owners WHERE username = :username AND password = :password")
+     fun getOwnerByEmailAndPassword(username: String, password: String): OwnerEntity?
 
     @Query("SELECT * FROM owners")
-    suspend fun getAllOwners(): List<OwnerEntity>
+     fun getAllOwners(): MutableList<OwnerEntity>
 }
 
 @Dao
@@ -104,15 +104,15 @@ interface CashierOrWaiterDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
      fun insertCashierOrWaiter(cashierOrWaiter: CashierOrWaiterEntity): Long
 
-    @Update
-     fun updateCashierOrWaiter(cashierOrWaiter: CashierOrWaiterEntity)
+    @Query("UPDATE cashiersOrWaiter SET name = :name, username = :username, email = :email, password = :password WHERE cashiersOrWaiterId = :cashiersOrWaiterId")
+     fun updateCashierOrWaiter(name: String, username: String, email: String, password: String, cashiersOrWaiterId: Int)
 
     @Delete
      fun deleteCashierOrWaiter(cashierOrWaiter: CashierOrWaiterEntity)
 
-    @Query("SELECT * FROM cashiersOrWaiter WHERE email = :email AND password = :password")
-     fun getCashierOrWaiterByEmailAndPassword(email: String, password: String): CashierOrWaiterEntity?
+    @Query("SELECT * FROM cashiersOrWaiter WHERE username = :username AND password = :password")
+     fun getCashierOrWaiterByUserAndPassword(username: String, password: String): CashierOrWaiterEntity?
 
     @Query("SELECT * FROM cashiersOrWaiter")
-     fun getAllCashiersOrWaiters(): List<CashierOrWaiterEntity>
+     fun getAllCashiersOrWaiters(): MutableList<CashierOrWaiterEntity>
 }

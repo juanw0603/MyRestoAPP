@@ -88,7 +88,8 @@
             android:layout_marginHorizontal="20dp"
             android:layout_weight="3"
             android:backgroundTint="#5A90F7"
-            android:text="tambah pesanan" />
+            android:text="tambah pesanan"
+            app:cornerRadius="10dp" />
 
         <Button
             android:id="@+id/btn_transaction"
@@ -97,7 +98,8 @@
             android:layout_marginHorizontal="20dp"
             android:layout_weight="3"
             android:backgroundTint="#5A90F7"
-            android:text="selesaikan pesanan" />
+            android:text="selesaikan pesanan"
+            app:cornerRadius="10dp" />
     </LinearLayout>
 
     <TextView
@@ -153,5 +155,18 @@
             android:layout_weight="0.5" />
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#598FF5"
+        android:text="add table"
+        app:cornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView12"
+        app:layout_constraintEnd_toStartOf="@+id/linearLayout"
+        app:layout_constraintHorizontal_bias="0.403"
+        app:layout_constraintStart_toEndOf="@+id/textView12"
+        app:layout_constraintTop_toTopOf="@+id/textView12" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

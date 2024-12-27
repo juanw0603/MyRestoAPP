@@ -1,10 +1,16 @@
 package app.c14210290.myrestoapp
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import app.c14210290.myrestoapp.database.CashierOrWaiterEntity
+import app.c14210290.myrestoapp.database.RestoDB
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -17,6 +23,9 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class Owner_DaftarWaiterOrCashier : Fragment() {
+    private lateinit var DB: RestoDB
+    private lateinit var adapterDaftarWaiterOrCashierMenu: adapter_OwnerDaftarWaiterOrCashier
+    private var arWaiterOrCashier: MutableList<CashierOrWaiterEntity> = mutableListOf()
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -27,6 +36,37 @@ class Owner_DaftarWaiterOrCashier : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        DB = RestoDB.getdatabase(requireContext())
+        adapterDaftarWaiterOrCashierMenu = adapter_OwnerDaftarWaiterOrCashier(arWaiterOrCashier)
+        val rvDaftarWaiterOrCashier = view.findViewById<RecyclerView>(R.id.rv_daftarCashierOrWaiter)
+
+        rvDaftarWaiterOrCashier.layoutManager = LinearLayoutManager(this.context)
+        rvDaftarWaiterOrCashier.adapter = adapterDaftarWaiterOrCashierMenu
+
+        var dataCashierOrWaiter = DB.funCashierOrWaiterDao().getAllCashiersOrWaiters()
+        adapterDaftarWaiterOrCashierMenu.isiData(dataCashierOrWaiter)
+
+        val btn_addCashierOrWaiter = view.findViewById<FloatingActionButton>(R.id.btn_addCashierOrWaiter)
+
+        btn_addCashierOrWaiter.setOnClickListener {
+            startActivity(Intent(this.context, addOrEditCashierOrWaiter::class.java))
+        }
+
+
+        adapterDaftarWaiterOrCashierMenu.setOnItemClickCallback(
+            object : adapter_OwnerDaftarWaiterOrCashier.OnItemClickCallback {
+                override fun delDataMenu(daftarKaryawan: CashierOrWaiterEntity) {
+                    DB.funCashierOrWaiterDao().deleteCashierOrWaiter(daftarKaryawan)
+
+                }
+            }
+        )
+
     }
 
     override fun onCreateView(

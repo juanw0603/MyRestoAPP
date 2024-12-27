@@ -50,7 +50,7 @@
                 android:textAllCaps="false" />
 
             <EditText
-                android:id="@+id/etUsername"
+                android:id="@+id/et_nameProfile"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="20dp"

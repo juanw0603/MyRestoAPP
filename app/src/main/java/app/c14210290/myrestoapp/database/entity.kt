@@ -1,14 +1,20 @@
 package app.c14210290.myrestoapp.database
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "tables")
 data class TableEntity(
-    @PrimaryKey(autoGenerate = true) val tableId: Int = 0,
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "tableId")
+    val tableId: Int = 0 ,
+    @ColumnInfo(name = "number")
     val number: Int, // Nomor meja
+    @ColumnInfo(name = "status")
     val status: String, // Status meja (kosong, dipesan, selesai)
+    @ColumnInfo(name = "currentOrder")
     val currentOrder: Int? = null // ID pesanan saat ini (nullable)
 )
 
@@ -67,9 +73,16 @@ data class MenuItemEntity(
 
 @Entity(tableName = "owners")
 data class OwnerEntity(
-    @PrimaryKey(autoGenerate = true) val ownersId: Int = 0, // ID unik
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "ownersId")
+    val ownersId: Int = 0, // ID unik
+    @ColumnInfo(name = "name")
     val name: String, // Nama owner
+    @ColumnInfo(name = "username")
+    val username: String, // username untuk login
+    @ColumnInfo(name = "email")
     val email: String, // Email owner
+    @ColumnInfo(name = "password")
     val password: String // Password (sebaiknya di-hash untuk keamanan)
 )
 
@@ -77,7 +90,7 @@ data class OwnerEntity(
 data class CashierOrWaiterEntity(
     @PrimaryKey(autoGenerate = true) val cashiersOrWaiterId: Int = 0, // ID unik
     val name: String, // Nama cashier/waiter
+    val username: String, // username untuk login
     val email: String, // Email untuk login
     val password: String, // Password (sebaiknya di-hash untuk keamanan)
-    val profilePicture: String? = null // URL atau path untuk foto profil (nullable)
 )

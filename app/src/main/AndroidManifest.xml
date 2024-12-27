@@ -13,6 +13,21 @@
         android:theme="@style/Theme.MyRestoAPP"
         tools:targetApi="31">
         <activity
+            android:name=".addOrEditCashierOrWaiter"
+            android:exported="false" />
+        <activity
+            android:name=".activityAddOrEditMakanan"
+            android:exported="false" />
+        <activity
+            android:name=".tambahOrEditMakanan"
+            android:exported="false" />
+        <activity
+            android:name=".register"
+            android:exported="false" />
+        <activity
+            android:name=".addOrEditProfile"
+            android:exported="false" />
+        <activity
             android:name=".ownerPage"
             android:exported="false" />
         <activity
