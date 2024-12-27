@@ -19,6 +19,12 @@ class kasirWaiter_page : AppCompatActivity() {
             insets
         }
 
+        val btn_addTable = findViewById<Button>(R.id.btn_addTable)
+        btn_addTable.setOnClickListener {
+            val intent = Intent(this@kasirWaiter_page, addTablePage::class.java)
+            startActivity(intent)
+        }
+
         val _btnTransaction = findViewById<Button>(R.id.btn_transaction)
         _btnTransaction
         _btnTransaction.setOnClickListener {
