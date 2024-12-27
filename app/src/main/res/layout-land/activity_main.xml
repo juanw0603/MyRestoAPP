@@ -51,7 +51,7 @@
                 android:textAllCaps="false" />
 
             <EditText
-                android:id="@+id/etUsername"
+                android:id="@+id/et_nameProfile"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="20dp"
@@ -112,16 +112,34 @@
                     android:textSize="16sp" />
             </RadioGroup>
 
-            <Button
-                android:id="@+id/btnLogin"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginHorizontal="20dp"
                 android:layout_weight="1"
-                android:backgroundTint="#5A90F7"
-                android:gravity="center"
-                android:text="Login"
-                app:cornerRadius="10dp" />
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <Button
+                    android:id="@+id/btn_register"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="#598FF5"
+                    android:text="register"
+                    app:cornerRadius="10dp" />
+
+                <Button
+                    android:id="@+id/btn_Login"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="#5A90F7"
+                    android:gravity="center"
+                    android:text="Login"
+                    app:cornerRadius="10dp" />
+            </LinearLayout>
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>

@@ -13,6 +13,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         android:text="nama pesanan"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,6 +25,7 @@
         android:layout_marginStart="50dp"
         android:layout_marginEnd="32dp"
         android:text="10"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/tvNamaPesanan"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tvNamaPesanan"

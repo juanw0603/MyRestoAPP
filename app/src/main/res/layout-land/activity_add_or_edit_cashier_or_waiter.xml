@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".addOrEditCashierOrWaiter">
+
+    <TextView
+        android:id="@+id/textView27"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:text="Nama : "
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/etNamaUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="contoh : john doe"
+        android:inputType="text"
+        app:layout_constraintStart_toEndOf="@+id/textView27"
+        app:layout_constraintTop_toTopOf="@+id/textView27" />
+
+    <TextView
+        android:id="@+id/textView29"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="username"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/textView27"
+        app:layout_constraintTop_toTopOf="@+id/etusernameUser" />
+
+    <EditText
+        android:id="@+id/etusernameUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="contoh : adadeh1"
+        android:inputType="text"
+        app:layout_constraintStart_toEndOf="@+id/textView29"
+        app:layout_constraintTop_toBottomOf="@+id/etNamaUser" />
+
+    <TextView
+        android:id="@+id/textView30"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="email"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/textView27"
+        app:layout_constraintTop_toTopOf="@+id/etemailUser" />
+
+    <EditText
+        android:id="@+id/etemailUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="contoh : john@gmail.com"
+        android:inputType="text"
+        app:layout_constraintStart_toEndOf="@+id/textView30"
+        app:layout_constraintTop_toBottomOf="@+id/etusernameUser" />
+
+    <TextView
+        android:id="@+id/textView31"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="password"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/textView27"
+        app:layout_constraintTop_toBottomOf="@+id/etemailUser" />
+
+    <EditText
+        android:id="@+id/etpasswordUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPassword"
+        app:layout_constraintStart_toEndOf="@+id/textView31"
+        app:layout_constraintTop_toBottomOf="@+id/etemailUser" />
+
+    <Button
+        android:id="@+id/btn_addUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="tambah"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/etNamaUser"
+        app:layout_constraintTop_toTopOf="@+id/etNamaUser" />
+
+    <Button
+        android:id="@+id/btn_editUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="edit"
+        app:layout_constraintEnd_toEndOf="@+id/btn_addUser"
+        app:layout_constraintStart_toStartOf="@+id/btn_addUser"
+        app:layout_constraintTop_toBottomOf="@+id/btn_addUser" />
+</androidx.constraintlayout.widget.ConstraintLayout>
