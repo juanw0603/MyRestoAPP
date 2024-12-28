@@ -70,6 +70,9 @@ interface MenuItemDao {
     @Update
      fun updateMenuItem(menuItem: MenuItemEntity)
 
+     @Query("UPDATE menu_items SET name = :name, price = :price WHERE menuItemsId = :menuItemsId")
+     fun updateMenuItemById(menuItemsId: Int, name: String, price: Double)
+
     @Delete
      fun deleteMenuItem(menuItem: MenuItemEntity)
 

@@ -1,10 +1,12 @@
 package app.c14210290.myrestoapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -31,18 +33,22 @@ class activityAddOrEditMakanan : AppCompatActivity() {
         val btn_edit = findViewById<Button>(R.id.btn_edit)
         val btn_tambah = findViewById<Button>(R.id.btn_tambah)
 
-//        var data = intent.getStringExtra("menuItemsid")
-//
-//        if (data != null) {
-//            btn_tambah.isEnabled = false
-//            btn_tambah.isClickable = false
-//            btn_tambah.visibility = View.INVISIBLE
-//
-//        } else {
-//            btn_edit.isEnabled = false
-//            btn_edit.isClickable = false
-//            btn_edit.visibility = View.INVISIBLE
-//        }
+        if(intent.getIntExtra("edit", 0) == 1){
+            var id = intent.getIntExtra("menuItemsid", 0)
+            et_NamaMakanan.setText(intent.getStringExtra("MenuName"))
+            et_harga.setText(intent.getStringExtra("MenuPrice"))
+
+            btn_tambah.visibility = Button.GONE
+            btn_tambah.isEnabled = false
+            btn_edit.setOnClickListener {
+                Toast.makeText(this, "data ke " + id +" berhasil di ubah !!!", Toast.LENGTH_LONG).show()
+                DB.funmenuItemDao().updateMenuItemById(id, et_NamaMakanan.text.toString(), et_harga.text.toString().toDouble())
+                startActivity(Intent(this@activityAddOrEditMakanan, ownerPage::class.java))
+            }
+        } else{
+            btn_edit.visibility = Button.GONE
+            btn_edit.isEnabled = false
+        }
 
 
         btn_tambah.setOnClickListener {
@@ -53,16 +59,14 @@ class activityAddOrEditMakanan : AppCompatActivity() {
                     price = et_harga.text.toString().toInt().toDouble()
                     )
             )
+
+            Toast.makeText(this, "data berhasil ditambahkan !!!", Toast.LENGTH_LONG).show()
+            finish()
+
+            startActivity(Intent(this@activityAddOrEditMakanan, ownerPage::class.java))
         }
 
-        btn_edit.setOnClickListener {
-            DB.funmenuItemDao().updateMenuItem(
-                MenuItemEntity(
-                    name = et_NamaMakanan.text.toString(),
-                    price = et_harga.text.toString().toInt().toDouble()
-                )
-            )
-        }
+
 
 
 

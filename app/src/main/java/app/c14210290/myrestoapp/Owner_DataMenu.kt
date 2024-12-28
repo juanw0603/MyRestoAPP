@@ -58,11 +58,13 @@ class Owner_DataMenu : Fragment() {
             startActivity(Intent(this.context, activityAddOrEditMakanan::class.java))
         }
 
-        adapterMenu.setOnItemClickCallback(object : adapter_OwnerMakananCard.OnItemClickCallback {
-            override fun delDataMenu(dataMenu: MenuItemEntity) {
-                DB.funmenuItemDao().deleteMenuItem(dataMenu)
+        adapterMenu.setOnItemClickCallback(
+            object : adapter_OwnerMakananCard.OnItemClickCallback {
+                override fun delDataMenu(dataMenu: MenuItemEntity) {
+                    DB.funmenuItemDao().deleteMenuItem(dataMenu)
+                }
             }
-        })
+        )
 
 
     }

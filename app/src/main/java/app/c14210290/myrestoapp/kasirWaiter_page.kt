@@ -7,10 +7,18 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import app.c14210290.myrestoapp.database.RestoDB
+import app.c14210290.myrestoapp.database.TableEntity
 
 class kasirWaiter_page : AppCompatActivity() {
+    private lateinit var DB: RestoDB
+    private lateinit var AdapterMeja: adapter_kasirMeja
+    private var arMeja: MutableList<TableEntity> = mutableListOf()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        DB = RestoDB.getdatabase(this)
         enableEdgeToEdge()
         setContentView(R.layout.activity_kasir_waiter_page)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -18,6 +26,17 @@ class kasirWaiter_page : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        AdapterMeja = adapter_kasirMeja(arMeja)
+        var rvMeja = findViewById<RecyclerView>(R.id.rv_daftarMeja)
+
+        rvMeja.layoutManager = LinearLayoutManager(this)
+        rvMeja.adapter = AdapterMeja
+
+
+        var dataMeja = DB.funtableDao().getAllTables()
+        AdapterMeja.isiData(dataMeja)
+
 
         val btn_addTable = findViewById<Button>(R.id.btn_addTable)
         btn_addTable.setOnClickListener {
@@ -31,5 +50,13 @@ class kasirWaiter_page : AppCompatActivity() {
             val intent = Intent(this, konfirmasiBayarPage::class.java)
             startActivity(intent)
         }
+
+
+        AdapterMeja.setOnItemClickCallback(object : adapter_kasirMeja.OnItemClickCallback {
+            override fun getCurrentOrder(daftarMeja: TableEntity): Int? {
+                return daftarMeja.currentOrder
+
+            }
+        })
     }
 }

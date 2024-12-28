@@ -35,15 +35,17 @@ class adapter_OwnerMakananCard(private val dataMakanan: MutableList<MenuItemEnti
 
             holder.btn_editMakanan.setOnClickListener{
                 val intent = Intent(holder.itemView.context, activityAddOrEditMakanan::class.java).apply {
+                    putExtra("edit", 1)
                     putExtra("menuItemsid", daftar.menuItemsId)
                     putExtra("MenuName", daftar.name)
+                    putExtra("MenuPrice", daftar.price.toString())
                 }
 
                 it.context.startActivity(intent)
             }
 
             holder.btn_deleteMakanan.setOnClickListener{
-                onItemClickCallback
+                onItemClickCallback.delDataMenu(daftar)
             }
 
 

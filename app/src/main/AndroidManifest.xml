@@ -15,11 +15,13 @@
         <activity
             android:name=".addTablePage"
             android:exported="false" />
-        <activity
-            android:name=".konfirmasiBayarPage"
+        <activity android:name=".activityAddOrEditMakanan"
             android:exported="false" />
         <activity
-            android:name=".database.konfirmasiBayar"
+            android:name=".addOrEditCashierOrWaiter"
+            android:exported="false" />
+        <activity
+            android:name=".konfirmasiBayarPage"
             android:exported="false" />
         <activity
             android:name=".ownerPage"
