@@ -41,6 +41,9 @@ interface OrderDao {
 
     @Query("SELECT * FROM orders")
      fun getAllOrders(): MutableList<OrderEntity>
+
+//    @Query("SELECT MAX(totalPrice) FROM OrderEntity")
+//    fun getMaxTotalPrice(): Double?
 }
 
 
@@ -57,6 +60,13 @@ interface OrderDetailDao {
 
     @Query("SELECT * FROM order_details WHERE orderId = :orderId")
      fun getOrderDetailsByOrderId(orderId: Int): MutableList<OrderDetailEntity>
+
+     @Query("SELECT * FROM order_details\n" +
+             "JOIN menu_items\n" +
+             "ON order_details.menuItemId = menu_items.menuItemsId\n" +
+             "WHERE orderDetailsId = :orderDetailsId")
+     fun getOrderDetailsById(orderDetailsId: Int): OrderDetailEntity?
+
 
     @Query("SELECT * FROM order_details")
      fun getAllOrderDetails(): MutableList<OrderDetailEntity>

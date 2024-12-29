@@ -74,7 +74,7 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <androidx.recyclerview.widget.RecyclerView
+                <ListView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
             </LinearLayout>
@@ -82,7 +82,7 @@
         </androidx.cardview.widget.CardView>
 
         <Button
-            android:id="@+id/button4"
+            android:id="@+id/btn_tambahPesanan"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginHorizontal="20dp"
