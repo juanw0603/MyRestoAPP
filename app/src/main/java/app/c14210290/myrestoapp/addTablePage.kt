@@ -1,5 +1,6 @@
 package app.c14210290.myrestoapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -41,6 +42,8 @@ class addTablePage : AppCompatActivity() {
                     currentOrder = null
                 )
             )
+
+            startActivity(Intent(this@addTablePage, kasirWaiter_page::class.java))
         }
 
     }

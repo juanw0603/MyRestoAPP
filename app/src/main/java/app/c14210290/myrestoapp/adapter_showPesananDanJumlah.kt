@@ -3,14 +3,12 @@ package app.c14210290.myrestoapp
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import app.c14210290.myrestoapp.database.OrderDetailEntity
 
-class adapter_showOrderDetail(private val dataDetail: MutableList<OrderDetailEntity>):
+class adapter_showPesananDanJumlah(private val dataDetail: MutableList<OrderDetailEntity>):
 
-
-    RecyclerView.Adapter<adapter_showOrderDetail.daftarOrderDetailsViewHolder>(){
+    RecyclerView.Adapter<adapter_showPesananDanJumlah.daftarOrderDetailsViewHolder>(){
         inner class daftarOrderDetailsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             val tvNamaMakanan = itemView.findViewById<TextView>(R.id.tv_OrderDetails_itemName)
             val tvQuantityMakanan = itemView.findViewById<TextView>(R.id.tv_OrderDetails_itemQuantity)
@@ -25,11 +23,16 @@ class adapter_showOrderDetail(private val dataDetail: MutableList<OrderDetailEnt
             return dataDetail.size
         }
 
-        override fun onBindViewHolder(holder: adapter_showOrderDetail.daftarOrderDetailsViewHolder, position: Int) {
+        override fun onBindViewHolder(holder: adapter_showPesananDanJumlah.daftarOrderDetailsViewHolder, position: Int) {
             var daftar = dataDetail[position]
             holder.tvNamaMakanan.setText(daftar.menuItemId)
             holder.tvQuantityMakanan.setText(daftar.quantity)
         }
 
+        fun isiData(daftar: MutableList<OrderDetailEntity>){
+            dataDetail.clear()
+            dataDetail.addAll(daftar)
+            notifyDataSetChanged()
+        }
 
     }
