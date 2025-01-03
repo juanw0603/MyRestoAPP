@@ -11,6 +11,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import app.c14210290.myrestoapp.dataClass.SelectedTable
 import app.c14210290.myrestoapp.database.OrderDetailEntity
 import app.c14210290.myrestoapp.database.OrderEntity
 import app.c14210290.myrestoapp.database.RestoDB

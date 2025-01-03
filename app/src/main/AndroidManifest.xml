@@ -12,6 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyRestoAPP"
         tools:targetApi="31">
+        <activity android:name=".register"
+            android:exported="false" />
         <activity
             android:name=".tambahAtauEditPesanan"
             android:exported="false" />

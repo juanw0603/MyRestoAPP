@@ -62,6 +62,7 @@ class Owner_DataMenu : Fragment() {
             object : adapter_OwnerMakananCard.OnItemClickCallback {
                 override fun delDataMenu(dataMenu: MenuItemEntity) {
                     DB.funmenuItemDao().deleteMenuItem(dataMenu)
+                    adapterMenu.isiData(DB.funmenuItemDao().getAllMenuItems())
                 }
             }
         )

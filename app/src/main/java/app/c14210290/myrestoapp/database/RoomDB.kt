@@ -8,7 +8,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import java.util.concurrent.Executors
 
 
-@Database(entities = [TableEntity::class, OrderEntity::class, OrderDetailEntity::class, MenuItemEntity::class, OwnerEntity::class, CashierOrWaiterEntity::class], version = 1)
+@Database(entities = [TableEntity::class, OrderEntity::class, OrderDetailEntity::class, MenuItemEntity::class, OwnerEntity::class, CashierOrWaiterEntity::class], version = 4)
 abstract class RestoDB : RoomDatabase() {
 
     abstract fun funtableDao(): TableDao
@@ -19,6 +19,7 @@ abstract class RestoDB : RoomDatabase() {
     abstract fun funCashierOrWaiterDao(): CashierOrWaiterDao
 
     companion object {
+
         @Volatile
         private var INSTANCE:RestoDB? = null
 
@@ -30,7 +31,10 @@ abstract class RestoDB : RoomDatabase() {
                     INSTANCE = Room.databaseBuilder(
                         context.applicationContext,
                         RestoDB::class.java, "resto_db"
-                    ).allowMainThreadQueries().build()
+                    )
+                        .allowMainThreadQueries()
+                        .fallbackToDestructiveMigration()
+                        .build()
                 }
             }
 

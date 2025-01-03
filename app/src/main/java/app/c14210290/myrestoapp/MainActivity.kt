@@ -15,36 +15,8 @@ import app.c14210290.myrestoapp.database.RestoDB
 class MainActivity : AppCompatActivity() {
     private lateinit var DB:RestoDB
 
-//    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-//        DB = RestoDB.getdatabase(this)
-//        super.onCreate(savedInstanceState, persistentState)
-//        val db = Firebase.firestore
-//        db.collection("owner").get()
-//            .addOnSuccessListener {
-//                    result ->
-//                CoroutineScope(Dispatchers.IO).async {
-//                    for (document in result){
-//
-//                        DB.funownerDao().insertOwner(OwnerEntity(
-//                            name = document.data.get("name").toString(),
-//                            username = document.data.get("username").toString(),
-//                            email = document.data.get("email").toString(),
-//                            password = document.data.get("password").toString()
-//                        )
-//                        )
-//                    }
-//                }
-//
-//                Log.d("FirebaseDebug", "Data fetched successfully")
-//            }.addOnFailureListener { e ->
-//                Log.e("FirebaseError", "Error fetching data", e)
-//            }
-//    }
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         DB = RestoDB.getdatabase(this)
-
 
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()

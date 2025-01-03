@@ -3,6 +3,7 @@ package app.c14210290.myrestoapp.database
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "tables")
@@ -60,8 +61,10 @@ data class OrderDetailEntity(
     val orderId: Int, // Relasi ke tabel `orders`
     val menuItemId: Int, // Relasi ke tabel `menu_items`
     val quantity: Int, // Jumlah item
-    val price: Double // Harga satuan
+    val price: Double, // Harga satuan
+    val menuItemName: String? = null // Optional, transient field
 )
+
 
 
 @Entity(tableName = "menu_items")

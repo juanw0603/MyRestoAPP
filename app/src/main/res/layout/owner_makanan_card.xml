@@ -3,17 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="#00BCD4">
+    android:layout_height="150dp"
+    android:layout_marginVertical="10dp"
+    android:background="@drawable/layout_corner_bg">
 
     <TextView
         android:id="@+id/tvNamaMakanan"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_width="150dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:text="TextView"
-        android:textSize="48sp"
+        android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -21,36 +22,43 @@
         android:id="@+id/tvHargaMakanan"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:text="TextView"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/tvNamaMakanan"
-        app:layout_constraintStart_toStartOf="@+id/tvNamaMakanan"
-        app:layout_constraintTop_toBottomOf="@+id/tvNamaMakanan" />
+        app:layout_constraintBottom_toBottomOf="@+id/textView15"
+        app:layout_constraintStart_toEndOf="@+id/textView15"
+        app:layout_constraintTop_toTopOf="@+id/textView15" />
 
     <Button
         android:id="@+id/btn_editMakanan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginEnd="8dp"
         android:backgroundTint="#598FF5"
         android:text="edit"
-        app:layout_constraintBottom_toTopOf="@+id/btn_deleteMakanan"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_deleteMakanan"
+        app:layout_constraintEnd_toStartOf="@+id/btn_deleteMakanan"
         app:layout_constraintStart_toEndOf="@+id/tvNamaMakanan"
-        app:layout_constraintTop_toTopOf="@+id/tvNamaMakanan" />
+        app:layout_constraintTop_toTopOf="@+id/btn_deleteMakanan" />
 
     <Button
         android:id="@+id/btn_deleteMakanan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
         android:backgroundTint="#598FF5"
         android:text="delete"
-        app:layout_constraintBottom_toBottomOf="@+id/tvHargaMakanan"
-        app:layout_constraintEnd_toEndOf="@+id/btn_editMakanan"
-        app:layout_constraintStart_toStartOf="@+id/btn_editMakanan" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="Rp."
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tvNamaMakanan"
+        app:layout_constraintTop_toBottomOf="@+id/tvNamaMakanan" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -29,7 +29,15 @@ class adapter_kasirTambahPesananan(private val dataDetail: MutableList<OrderDeta
 
         override fun onBindViewHolder(holder: daftarOrderDetailsViewHolder, position: Int) {
             val daftar = dataDetail[position]
-            holder.tvNamaMakanan.setText(daftar.menuItemId)
+            holder.tvNamaMakanan.setText(daftar.menuItemName)
+            holder.tvQuantityMakanan.setText(daftar.quantity)
         }
 
-}
+
+        fun isiData(daftar: MutableList<OrderDetailEntity>){
+            dataDetail.clear()
+            dataDetail.addAll(daftar)
+            notifyDataSetChanged()
+        }
+
+    }

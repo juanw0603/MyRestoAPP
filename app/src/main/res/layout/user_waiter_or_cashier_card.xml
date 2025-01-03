@@ -42,6 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:backgroundTint="#03A9F4"
         android:text="edit"
         app:layout_constraintStart_toEndOf="@+id/tvwaiterOrCashierEmail"
         tools:layout_editor_absoluteY="43dp" />
@@ -50,6 +51,7 @@
         android:id="@+id/btn_deleteWaiterOrCashier"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="#03A9F4"
         android:text="delete"
         app:layout_constraintBottom_toBottomOf="@+id/btn_editUserWaiterOrCashier"
         app:layout_constraintEnd_toEndOf="parent"
