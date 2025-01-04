@@ -60,8 +60,8 @@ data class OrderDetailEntity(
     @PrimaryKey(autoGenerate = true) val orderDetailsId: Int = 0,
     val orderId: Int, // Relasi ke tabel `orders`
     val menuItemId: Int, // Relasi ke tabel `menu_items`
-    val quantity: Int, // Jumlah item
-    val price: Double, // Harga satuan
+    var quantity: Int, // Jumlah item
+    var price: Double, // Harga satuan
     val menuItemName: String? = null // Optional, transient field
 )
 

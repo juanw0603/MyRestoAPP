@@ -62,7 +62,7 @@ class Owner_DaftarWaiterOrCashier : Fragment() {
             object : adapter_OwnerDaftarWaiterOrCashier.OnItemClickCallback {
                 override fun delDataMenu(daftarKaryawan: CashierOrWaiterEntity) {
                     DB.funCashierOrWaiterDao().deleteCashierOrWaiter(daftarKaryawan)
-                    adapterDaftarWaiterOrCashierMenu.notifyDataSetChanged()
+                    adapterDaftarWaiterOrCashierMenu.isiData(DB.funCashierOrWaiterDao().getAllCashiersOrWaiters())
                 }
             }
         )

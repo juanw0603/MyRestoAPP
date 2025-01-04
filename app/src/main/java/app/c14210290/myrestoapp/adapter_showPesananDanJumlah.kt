@@ -25,7 +25,7 @@ class adapter_showPesananDanJumlah(private val dataDetail: MutableList<OrderDeta
 
         override fun onBindViewHolder(holder: adapter_showPesananDanJumlah.daftarOrderDetailsViewHolder, position: Int) {
             var daftar = dataDetail[position]
-            holder.tvNamaMakanan.setText(daftar.menuItemId)
+            holder.tvNamaMakanan.setText(daftar.menuItemName)
             holder.tvQuantityMakanan.setText(daftar.quantity)
         }
 
@@ -35,4 +35,12 @@ class adapter_showPesananDanJumlah(private val dataDetail: MutableList<OrderDeta
             notifyDataSetChanged()
         }
 
+        fun isi1Data(daftar: OrderDetailEntity){
+            dataDetail.add(daftar)
+            notifyDataSetChanged()
+        }
+
+        fun getAllData(): MutableList<OrderDetailEntity> {
+            return dataDetail.toMutableList()
+        }
     }

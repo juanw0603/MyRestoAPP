@@ -16,7 +16,7 @@ interface TableDao {
     fun deleteTable(table: TableEntity)
 
     @Query("UPDATE tables SET status = :status WHERE tableId = :tableId")
-    fun updateTableById(tableId: Int, status: String)
+    fun updateTableStatusById(tableId: Int, status: String)
 
     @Query("SELECT * FROM tables WHERE tableId = :tableId")
     fun getTableById(tableId: Int): TableEntity?
@@ -67,17 +67,8 @@ interface OrderDetailDao {
     @Query("SELECT * FROM order_details WHERE orderId = :orderId")
     fun getOrderDetailsByOrderId(orderId: Int): MutableList<OrderDetailEntity>
 
-    @Query(
-        "SELECT * FROM order_details\n" +
-                "JOIN menu_items\n" +
-                "ON order_details.menuItemId = menu_items.menuItemsId\n" +
-                "WHERE orderDetailsId = :orderDetailsId"
-    )
-
-
-
+    @Query("SELECT * FROM order_details WHERE orderDetailsId = :orderDetailsId")
     fun getOrderDetailsById(orderDetailsId: Int): OrderDetailEntity?
-
 
     @Query("SELECT * FROM order_details")
     fun getAllOrderDetails(): MutableList<OrderDetailEntity>

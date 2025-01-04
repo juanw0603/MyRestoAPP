@@ -6,6 +6,7 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -61,12 +62,11 @@ class kasirWaiter_page : AppCompatActivity() {
                 selectedTable = SelectedTable(daftarMeja.tableId)
 
                 // Update the TextView to display the selected table number
-                tvCurrentTableNumber.text = "Selected Table: ${selectedTable?.tableId}"
+                tvCurrentTableNumber.text = "table no : ${selectedTable?.tableId}"
 
                 val currentOrder =  DB.funorderDao().getOrderByTableIdAndStatusProces(selectedTable?.tableId ?: 0)
 
                 if (currentOrder != null) {
-                    // Fetch all order details for the current order
                     val orderDetails = DB.funorderDetailDao().getOrderDetailsByOrderId(currentOrder.orderId)
                     AdapterShowPesananDanJumlah.isiData(orderDetails)
                 } else {
@@ -76,23 +76,17 @@ class kasirWaiter_page : AppCompatActivity() {
             }
         })
 
+
+        val _btnTransaction = findViewById<Button>(R.id.btn_transaction)
         val btn_addTable = findViewById<Button>(R.id.btn_addTable)
+        val btn_tambahPesanan = findViewById<Button>(R.id.btn_tambahPesanan)
+
+
         btn_addTable.setOnClickListener {
             val intent = Intent(this@kasirWaiter_page, addTablePage::class.java)
             startActivity(intent)
         }
 
-        val _btnTransaction = findViewById<Button>(R.id.btn_transaction)
-
-        _btnTransaction.setOnClickListener {
-            val intent = Intent(this, konfirmasiBayarPage::class.java)
-            startActivity(intent)
-        }
-
-
-
-
-        val btn_tambahPesanan = findViewById<Button>(R.id.btn_tambahPesanan)
         btn_tambahPesanan.setOnClickListener {
             // Retrieve the selected table
             val selectedTableId = selectedTable?.tableId ?: 0
