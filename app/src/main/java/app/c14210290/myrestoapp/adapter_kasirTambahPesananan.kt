@@ -67,6 +67,9 @@ class adapter_kasirTambahPesananan(private val dataDetail: MutableList<OrderDeta
         dataDetail.addAll(daftar)
         notifyDataSetChanged()
     }
+    fun getData(): MutableList<OrderDetailEntity> {
+        return dataDetail.toMutableList()
+    }
     private lateinit var onItemClickCallback: OnItemClickCallback
 
     interface OnItemClickCallback{

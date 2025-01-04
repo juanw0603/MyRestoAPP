@@ -108,17 +108,63 @@ class kasirWaiter_page : AppCompatActivity() {
                         updatedAt = System.currentTimeMillis().toString()  // Replace with proper timestamp format
                     )
                     val newOrderId = DB.funorderDao().insertOrder(newOrder)
+                    DB.funtableDao().updateTableStatusById(selectedTableId,"proses")
                     currentOrder = newOrder.copy(orderId = newOrderId.toInt())
+                    Toast.makeText(this, "New order detail added.", Toast.LENGTH_SHORT).show()
                 }
 
-                Toast.makeText(this, "New order detail added.", Toast.LENGTH_SHORT).show()
 
+                val orderDetails = DB.funorderDetailDao().getOrderDetailsByOrderId(currentOrder.orderId)
+
+                val intent = if (orderDetails.isNotEmpty()) {
+                    val list = AdapterShowPesananDanJumlah.getAllData()
+                    Intent(this@kasirWaiter_page, tambahAtauEditPesanan::class.java).apply {
+                        putExtra("orderId", currentOrder.orderId)
+                        putExtra("tableId", selectedTableId)
+                    }
+                } else {
+                    Intent(this@kasirWaiter_page, tambahAtauEditPesanan::class.java).apply {
+                        putExtra("tableId", selectedTableId)
+                    }
+                }
+
+                startActivity(intent)
 
             } else {
                 Toast.makeText(this, "Please select a table first.", Toast.LENGTH_SHORT).show()
             }
         }
 
+
+        _btnTransaction.setOnClickListener {val dialog = AlertDialog.Builder(this@kasirWaiter_page)
+
+            val selectedTableId = selectedTable?.tableId ?: 0
+            val getCurrentTable = DB.funtableDao().getTableById(selectedTableId)
+
+            if (getCurrentTable != null) {
+                dialog.setTitle("you are about to continue to the transaction page")
+                dialog.setMessage("Are you sure to pay?")
+                dialog.setPositiveButton("Yes") { _, _ ->
+                    startActivity(
+                        Intent(
+                            this@kasirWaiter_page,
+                            konfirmasiBayarPage::class.java
+                        ).apply {
+                            putExtra("tableId", selectedTable?.tableId ?: 0)
+                        })
+
+                    finish()
+                }
+                dialog.setNegativeButton("No") { dialog, _ ->
+                    dialog.dismiss()
+                }
+
+                dialog.show()
+            }else {
+            Toast.makeText(this, "Please select a table first.", Toast.LENGTH_SHORT).show()
+        }
+
+        }
 
     }
 }

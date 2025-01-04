@@ -1,31 +1,24 @@
 package app.c14210290.myrestoapp
-
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [Owner_LaporanPenjualan.newInstance] factory method to
- * create an instance of this fragment.
- */
+import android.widget.TextView
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import app.c14210290.myrestoapp.database.RestoDB
+import kotlinx.coroutines.launch
 class Owner_LaporanPenjualan : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+
+    private lateinit var DB: RestoDB
+    private lateinit var textViewPendapatan: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+        // Inisialisasi database
+        DB = RestoDB.getdatabase(requireContext())
+        if (DB.pendapatanDao().getTotalPendapatan() == null) {
+            DB.pendapatanDao().insertPendapatanDummy()
         }
     }
 
@@ -33,27 +26,28 @@ class Owner_LaporanPenjualan : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_owner__laporan_penjualan, container, false)
+        // Inflate layout fragment
+        val view = inflater.inflate(R.layout.fragment_owner__laporan_penjualan, container, false)
+
+        // Inisialisasi elemen UI
+        textViewPendapatan = view.findViewById(R.id.textViewPendapatan)
+
+        // Tampilkan data pendapatan
+        loadTotalPendapatan()
+
+        return view
     }
 
+    private fun loadTotalPendapatan() {
+        lifecycleScope.launch {
+            val totalPendapatan = DB.pendapatanDao().getTotalPendapatan() ?: 0
+            textViewPendapatan.text = "Rp. $totalPendapatan"
+        }
+    }
+
+    // Companion object untuk membuat instance fragment tanpa argumen
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment Owner_LaporanPenjualan.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            Owner_LaporanPenjualan().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+        fun newInstance() = Owner_LaporanPenjualan()
     }
 }

@@ -3,6 +3,7 @@ package app.c14210290.myrestoapp
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -39,27 +40,56 @@ class tambahAtauEditPesanan : AppCompatActivity() {
 
         AdapterMakanan.isiData(DB.funmenuItemDao().getAllMenuItems())
 
-        val rvShowPesananDanJumlah = findViewById<RecyclerView>(R.id.rv_listPesanan)
+        val rvTambahPesanan = findViewById<RecyclerView>(R.id.rv_listPesanan)
 
         Adapter_kasirTambahPesananan = adapter_kasirTambahPesananan(arKasirMakananCard)
-        rvShowPesananDanJumlah.adapter = Adapter_kasirTambahPesananan
-        rvMakanan.adapter = AdapterMakanan
+        rvTambahPesanan.layoutManager = LinearLayoutManager(this)
+        rvTambahPesanan.adapter= Adapter_kasirTambahPesananan
 
         val tvCurrentTableNumber = findViewById<TextView>(R.id.tv_CurrentTableNumber)
 
         val selectedtableId = intent.getIntExtra("tableId", 0)
 
         tvCurrentTableNumber.setText("table no : $selectedtableId")
+        val btn_konfirmasiPesanan = findViewById<Button>(R.id.btn_konfirmasiPesanan)
+        Adapter_kasirTambahPesananan.setOnItemClickCallback(object : adapter_kasirTambahPesananan.OnItemClickCallback {
+            override fun nambahHarga(daftarOrder: OrderDetailEntity) {
+                daftarOrder.price += DB.funmenuItemDao().getMenuItemById(daftarOrder.menuItemId).toString().toInt().toDouble()
+            }
+
+            override fun kurangHarga(daftarOrder: OrderDetailEntity) {
+                daftarOrder.price -= DB.funmenuItemDao().getMenuItemById(daftarOrder.menuItemId).toString().toInt().toDouble()
+            }
+        })
 
         val orderId = intent.getIntExtra("orderId", 0)
         if (orderId != 0) {
             val orderDetails = DB.funorderDetailDao().getOrderDetailsByOrderId(orderId)
             Adapter_kasirTambahPesananan.isiData(orderDetails)
+            btn_konfirmasiPesanan.setOnClickListener {
+
+
+            }
         } else{
             val tableId = intent.getIntExtra("tableId", 0)
             val currentTable = DB.funtableDao().getTableById(tableId)
             val orderDetails = DB.funorderDetailDao().getOrderDetailsByOrderId(currentTable?.currentOrder?: 0)
             Adapter_kasirTambahPesananan.isiData(orderDetails)
+
+            btn_konfirmasiPesanan.setOnClickListener {
+
+                val orderDetailsList = Adapter_kasirTambahPesananan.getData()
+
+                // Loop through each order detail and insert it into the database
+                for (orderDetail in orderDetailsList) {
+                    DB.funorderDetailDao().insertOrderDetail(orderDetail)
+                }
+
+                Toast.makeText(this, "Order confirmed successfully!", Toast.LENGTH_SHORT).show()
+
+
+                finish()
+            }
 
         }
         
@@ -78,21 +108,10 @@ class tambahAtauEditPesanan : AppCompatActivity() {
         })
 
 
-        Adapter_kasirTambahPesananan.setOnItemClickCallback(object : adapter_kasirTambahPesananan.OnItemClickCallback {
-            override fun nambahHarga(daftarOrder: OrderDetailEntity) {
-                daftarOrder.price += DB.funmenuItemDao().getMenuItemById(daftarOrder.menuItemId).toString().toInt().toDouble()
-            }
 
-            override fun kurangHarga(daftarOrder: OrderDetailEntity) {
-                daftarOrder.price -= DB.funmenuItemDao().getMenuItemById(daftarOrder.menuItemId).toString().toInt().toDouble()
-            }
-        })
-        
-        val btn_konfirmasiPesanan = findViewById<Button>(R.id.btn_konfirmasiPesanan)
-        btn_konfirmasiPesanan.setOnClickListener {
-            val selectedTableId = intent.getIntExtra("tableId", 0)
 
-        }
+
+
 
     }
 

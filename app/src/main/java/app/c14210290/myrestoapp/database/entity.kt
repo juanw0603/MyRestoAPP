@@ -97,3 +97,9 @@ data class CashierOrWaiterEntity(
     val email: String, // Email untuk login
     val password: String, // Password (sebaiknya di-hash untuk keamanan)
 )
+
+@Entity(tableName = "pendapatan")
+data class Pendapatan(
+    @PrimaryKey(autoGenerate = true) val pendapatanId: Int = 0,
+    val totalPendapatan: Double
+)

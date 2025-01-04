@@ -1,6 +1,7 @@
 package app.c14210290.myrestoapp.database
 
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 
 
@@ -139,4 +140,16 @@ interface CashierOrWaiterDao {
 
     @Query("SELECT * FROM cashiersOrWaiter")
     fun getAllCashiersOrWaiters(): MutableList<CashierOrWaiterEntity>
+}
+
+@Dao
+interface PendapatanDao {
+    @Insert
+    fun insertPendapatan(pendapatan: Pendapatan)
+
+    @Query("SELECT SUM(totalPendapatan) FROM pendapatan")
+    fun getTotalPendapatan(): Double?
+
+    @Query("INSERT INTO pendapatan (totalPendapatan) VALUES (1400000)")
+    fun insertPendapatanDummy()
 }

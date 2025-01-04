@@ -8,7 +8,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import java.util.concurrent.Executors
 
 
-@Database(entities = [TableEntity::class, OrderEntity::class, OrderDetailEntity::class, MenuItemEntity::class, OwnerEntity::class, CashierOrWaiterEntity::class], version = 4)
+@Database(entities = [TableEntity::class, OrderEntity::class, OrderDetailEntity::class, MenuItemEntity::class, OwnerEntity::class, CashierOrWaiterEntity::class, Pendapatan::class], version = 5)
 abstract class RestoDB : RoomDatabase() {
 
     abstract fun funtableDao(): TableDao
@@ -17,6 +17,7 @@ abstract class RestoDB : RoomDatabase() {
     abstract fun funmenuItemDao(): MenuItemDao
     abstract fun funownerDao(): OwnerDao
     abstract fun funCashierOrWaiterDao(): CashierOrWaiterDao
+    abstract fun pendapatanDao(): PendapatanDao
 
     companion object {
 
@@ -40,5 +41,31 @@ abstract class RestoDB : RoomDatabase() {
 
             return INSTANCE as RestoDB
         }
+
+        fun getDatabase1(context: Context): RestoDB {
+            return INSTANCE ?: synchronized(this) {
+                val instance = Room.databaseBuilder(
+                    context.applicationContext,
+                    RestoDB::class.java,
+                    "pendapatan_database"
+                )
+                    .addCallback(object : Callback() {
+                        override fun onCreate(db: SupportSQLiteDatabase) {
+                            super.onCreate(db)
+                            // Tambahkan data awal ke database
+                            Executors.newSingleThreadExecutor().execute {
+                                getdatabase(context).pendapatanDao().insertPendapatan(
+                                    pendapatan = Pendapatan(totalPendapatan = 12000000.0) // Contoh data awal Rp 12.000.000
+                                )
+                            }
+                        }
+                    })
+                    .fallbackToDestructiveMigration()
+                    .build()
+                INSTANCE = instance
+                instance
+            }
+        }
     }
 }
+
