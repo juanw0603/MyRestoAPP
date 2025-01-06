@@ -155,7 +155,7 @@ class kasirWaiter_page : AppCompatActivity() {
 
                     finish()
                 }
-                dialog.setNegativeButton("No") { dialog, _ ->
+                dialog.setNegativeButton("no") { dialog, _ ->
                     dialog.dismiss()
                 }
 
